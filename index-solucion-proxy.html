@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solución: Carga Diferida con Patrón Proxy Virtual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/solution-style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Demostración de la Solución: Patrón Proxy Virtual para Carga Diferida</h1>
+        <p>Esta página implementa el patrón <strong>Proxy Virtual</strong> para la carga de imágenes. Las imágenes grandes <strong>solo se cargarán cuando sean visibles</strong> en la pantalla del usuario (lazy loading). Esto mejora el tiempo de carga inicial y el uso del ancho de banda.</p>
+
+        <p>Abre la consola de tu navegador (F12) y la pestaña "Network" para observar cómo las solicitudes de imágenes se inician solo a medida que haces scroll.</p>
+
+        <h2>Galería de Imágenes (con Lazy Loading por Proxy)</h2>
+        <div class="image-gallery" id="imageGallery">
+            </div>
+
+        <div class="explanation">
+            <h2>La Solución con el Patrón Proxy Virtual</h2>
+            <p>Utilizamos el patrón Proxy Virtual para gestionar la carga de cada imagen. Aquí, la interfaz (implícita en JS) sería la capacidad de "mostrar" una imagen.</p>
+
+            <h3>Componentes del Patrón:</h3>
+            <ul>
+                <li><code><b>RealImage</b></code> (RealSubject): Representa la imagen de alta resolución que realmente se descarga y muestra. Su método <code>display()</code> contiene la lógica de carga real.</li>
+                <li><code><b>ImageProxy</b></code> (Proxy): Actúa como un sustituto de <code>RealImage</code>. Inicialmente, solo sabe la URL de la imagen y muestra un placeholder. Implementa el mismo método <code>display()</code> que <code>RealImage</code>. Cuando <code>display()</code> es invocado por el cliente (a través del `IntersectionObserver`), el Proxy comprueba si la imagen ya ha sido cargada. Si no, crea una instancia de <code>RealImage</code> y le delega la tarea de carga.</li>
+                <li><b>Cliente:</b> El código que interactúa con <code>ImageProxy</code>. En nuestro caso, el JavaScript que usa el <code>IntersectionObserver</code> para determinar cuándo una tarjeta de imagen entra en el viewport y llama a <code>proxy.display()</code>.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="module" src="assets/js/app-solucion.js"></script>
+</body>
+</html>

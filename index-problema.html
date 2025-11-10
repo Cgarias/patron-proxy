@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problema: Carga Directa de Imágenes (Sin Proxy)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/problem-style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Demostración del Problema: Carga Directa de Imágenes Grandes</h1>
+        <p>Esta página simula una galería de imágenes donde <strong>todas las imágenes se cargan inmediatamente</strong> al abrir la página. Observa el tiempo de carga y el rendimiento, especialmente si tienes muchas imágenes.</p>
+
+        <p>Abre la consola de tu navegador (F12) y la pestaña "Network" para ver cómo se descargan todas las imágenes al inicio.</p>
+
+        <h2>Galería de Imágenes</h2>
+        <div class="image-gallery" id="imageGallery">
+            </div>
+
+        <div class="explanation">
+            <h2>El Problema sin el Patrón Proxy</h2>
+            <p>En esta implementación, cada imagen se inserta en el DOM con su URL completa directamente. El navegador intenta descargar todas las imágenes tan pronto como parsea el HTML. Esto lleva a:</p>
+            <ul>
+                <li>❌ <strong>Carga inicial lenta:</strong> La página tarda más en volverse interactiva, especialmente con conexiones lentas o muchos recursos.</li>
+                <li>❌ <strong>Desperdicio de ancho de banda:</strong> Se descargan imágenes que el usuario quizás nunca vea (si no hace scroll).</li>
+                <li>❌ <strong>Mayor uso de memoria:</strong> Todas las imágenes se almacenan en memoria desde el principio.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="module" src="assets/js/app-problema.js"></script>
+</body>
+</html>
